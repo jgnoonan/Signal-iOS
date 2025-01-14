@@ -1,0 +1,78 @@
+{
+  "name": "SignalRingRTC",
+  "version": "2.49.2",
+  "summary": "A Swift & Objective-C library used by the Signal iOS app for WebRTC interactions.",
+  "description": "A Swift & Objective-C library used by the Signal iOS app for WebRTC interactions.\"",
+  "license": "AGPLv3",
+  "homepage": "https://github.com/signalapp/ringrtc",
+  "source": {
+    "git": "https://github.com/signalapp/ringrtc.git",
+    "tag": "v2.49.2"
+  },
+  "authors": {
+    "Calling Team": "callingteam@signal.org"
+  },
+  "social_media_url": "https://twitter.com/signalapp",
+  "platforms": {
+    "ios": "13"
+  },
+  "requires_arc": true,
+  "swift_versions": "5",
+  "source_files": [
+    "src/ios/SignalRingRTC/SignalRingRTC/**/*.{h,m,swift}",
+    "out/release/libringrtc/*.h"
+  ],
+  "public_header_files": "src/ios/SignalRingRTC/SignalRingRTC/**/*.h",
+  "private_header_files": "out/release/libringrtc/*.h",
+  "module_map": "src/ios/SignalRingRTC/SignalRingRTC/SignalRingRTC.modulemap",
+  "preserve_paths": [
+    "acknowledgments/acknowledgments.plist",
+    "bin/set-up-for-cocoapods",
+    "bin/fetch-artifact.py",
+    "config/version.sh",
+    "config/version.properties",
+    "prebuild-checksum",
+    "out/release/libringrtc",
+    "out/release/acknowledgments-webrtc-ios.plist"
+  ],
+  "pod_target_xcconfig": {
+    "LIBRINGRTC_IF_NEEDED": "$(PODS_TARGET_SRCROOT)/out/release/libringrtc/$(CARGO_BUILD_TARGET)/libringrtc.a",
+    "OTHER_LDFLAGS": "$(LIBRINGRTC_IF_NEEDED)",
+    "RINGRTC_PREBUILD_DIR": "$(USER_LIBRARY_DIR)/Caches/org.signal.ringrtc/prebuild-2.49.2",
+    "CARGO_BUILD_TARGET[sdk=iphonesimulator*][arch=arm64]": "aarch64-apple-ios-sim",
+    "CARGO_BUILD_TARGET[sdk=iphonesimulator*][arch=*]": "x86_64-apple-ios",
+    "CARGO_BUILD_TARGET[sdk=iphoneos*]": "aarch64-apple-ios"
+  },
+  "script_phases": [
+    {
+      "name": "Check prebuild",
+      "execution_position": "before_compile",
+      "input_files": [
+        "$(PODS_TARGET_SRCROOT)/prebuild-checksum",
+        "$(RINGRTC_PREBUILD_DIR)/prebuild-checksum"
+      ],
+      "output_files": [
+        "$(DERIVED_FILE_DIR)/prebuild-checksum"
+      ],
+      "script": "\n        set -euo pipefail\n        if [[ ! -f \"${SCRIPT_INPUT_FILE_0}\" ]]; then\n          # Local development, ignore\n          exit\n        elif [[ ! -f \"${SCRIPT_INPUT_FILE_1}\" ]]; then\n          echo 'error: Cannot find prebuild directory' \"${RINGRTC_PREBUILD_DIR}\" >&2\n          echo 'note: If you are trying to use a local checkout of RingRTC, delete' \"${SCRIPT_INPUT_FILE_0}\" 'and try again' >&2\n          echo 'note: Otherwise, please run Pods/SignalRingRTC/bin/set-up-for-cocoapods' >&2\n          echo 'note: If you are in the Signal iOS repo, you can use `make dependencies`' >&2\n          exit 1\n        elif ! diff -q \"${SCRIPT_INPUT_FILE_0}\" \"${SCRIPT_INPUT_FILE_1}\"; then\n          # Why not run it now? Because Xcode may have already processed some of the files.\n          echo 'error: Please run Pods/SignalRingRTC/bin/set-up-for-cocoapods' >&2\n          echo 'note: If you are in the Signal iOS repo, you can use `make dependencies`' >&2\n          exit 1\n        fi\n        cp \"${SCRIPT_INPUT_FILE_0}\" \"${SCRIPT_OUTPUT_FILE_0}\"\n      "
+    }
+  ],
+  "prepare_command": "bin/set-up-for-cocoapods",
+  "testspecs": [
+    {
+      "name": "Tests",
+      "test_type": "unit",
+      "source_files": "src/ios/SignalRingRTC/SignalRingRTCTests/**/*.{h,m,swift}",
+      "dependencies": {
+        "Nimble": []
+      }
+    }
+  ],
+  "subspecs": [
+    {
+      "name": "WebRTC",
+      "vendored_frameworks": "out/release/WebRTC.xcframework"
+    }
+  ],
+  "swift_version": "5"
+}

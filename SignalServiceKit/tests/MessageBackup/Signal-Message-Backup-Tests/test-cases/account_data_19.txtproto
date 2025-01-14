@@ -1,0 +1,89 @@
+// This file was auto-generated! It's only meant to show you what's in the .binproto. Do not edit!
+
+BackupInfo {
+  backupTimeMs = 1715636551000
+  currentAppVersion = "FooClient 2.0.0"
+  firstAppVersion = "FooClient 1.0.0"
+  mediaRootBackupKey = <8fba3ce1946b78a4ca0d9229ddb050a12702072309d6574ae12451269e5fdbb2>
+  version = 1
+}
+
+Frame {
+  account = AccountData {
+    accountSettings = AccountSettings {
+      customChatColors = [
+        CustomChatColor {
+          id = 1
+          solid = -4323357
+        },
+        CustomChatColor {
+          id = 2
+          solid = -4019538
+        },
+        CustomChatColor {
+          gradient = Gradient {
+            angle = 185
+            colors = [
+              -11825771,
+              -6506482
+            ]
+            positions = [
+              0.0,
+              1.0
+            ]
+          }
+          id = 3
+        }
+      ]
+      defaultChatStyle = ChatStyle {
+        bubbleColorPreset = BubbleColorPreset.GRADIENT_FLUORESCENT
+        dimWallpaperInDarkMode = true
+        wallpaperPreset = WallpaperPreset.GRADIENT_SUNSET
+      }
+      phoneNumberSharingMode = PhoneNumberSharingMode.NOBODY
+      universalExpireTimerSeconds = 264034631
+    }
+    avatarUrlPath = "https://example.com/neLVzsX"
+    donationSubscriberData = SubscriberData {
+      currencyCode = "GBP"
+      manuallyCancelled = true
+      subscriberId = <f58cca155df7981e10411f6eea6a34842a849b36033d55ee22ad8089d8b31e0b>
+    }
+    familyName = "Hernandez"
+    givenName = "Lea"
+    profileKey = <c5fbf0ffdf7a948adb326789aebcb5a166a1e4dfbdea011a4c4f4cdd16292569>
+    username = "joey.6010"
+    usernameLink = UsernameLink {
+      color = Color.BLUE
+      entropy = <66da53caf60c4ec900b2dee58107854a29a3b2f195b0f63bd4c8184986860917>
+      serverId = <5bc982fa3e64d7eea8973f9028fe841d>
+    }
+  }
+}
+
+Frame {
+  recipient = Recipient {
+    id = 1
+    self = Self {}
+  }
+}
+
+Frame {
+  recipient = Recipient {
+    id = 2
+    releaseNotes = ReleaseNotes {}
+  }
+}
+
+Frame {
+  recipient = Recipient {
+    distributionList = DistributionListItem {
+      distributionId = <00000000000000000000000000000000>
+      distributionList = DistributionList {
+        name = ""
+        privacyMode = PrivacyMode.ALL
+      }
+    }
+    id = 3
+  }
+}

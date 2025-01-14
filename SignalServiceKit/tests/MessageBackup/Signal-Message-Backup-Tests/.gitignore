@@ -1,0 +1,13 @@
+### IntelliJ IDEA ###
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+.idea/
+!.idea/file.template.settings.xml
+!.idea/fileTemplates/
+.gradle/
+build/
+kls_database.db
+
+### Mac OS ###
+.DS_Store
